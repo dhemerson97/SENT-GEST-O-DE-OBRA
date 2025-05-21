@@ -3,1052 +3,578 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENT - Gestão de Obras</title>
+    <!-- TÍTULO DA PÁGINA - SUBSTITUA COM SEU TÍTULO -->
+    <title>Coleção Revit Elite: 19 Projetos de Casas de Alto Padrão</title>
+    
+    <!-- CSS E FONTES - NÃO ALTERAR ESTA SEÇÃO -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CONFIGURAÇÕES DO TAILWIND - ALTERE AS CORES SE NECESSÁRIO -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a',       /* COR PRIMÁRIA (AZUL) - ALTERE SE QUISER */
+                        secondary: '#d4a017',     /* COR SECUNDÁRIA (DOURADO) - ALTERE SE QUISER */
+                        accent: '#2563eb',        /* COR DE DESTAQUE - ALTERE SE QUISER */
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- ESTILOS PERSONALIZADOS - PODE ALTERAR ANIMAÇÕES E EFEITOS SE QUISER -->
     <style>
-        .sidebar {
-            transition: all 0.3s;
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); /* GRADIENTE DO HEADER - ALTERE CORES SE QUISER */
         }
-        .sidebar-collapsed {
-            width: 70px;
+        
+        .floating-cta {
+            animation: float 3s ease-in-out infinite;
         }
-        .sidebar-expanded {
-            width: 250px;
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
-        .main-content {
-            transition: margin-left 0.3s;
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .tab-content {
-            display: none;
+        
+        .testimonial-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        .tab-content.active {
-            display: block;
+        
+        .testimonial-card:hover {
+            transform: scale(1.02);
         }
-        .alert-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            font-size: 10px;
-            background-color: #ef4444;
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        
+        .faq-item {
+            transition: all 0.3s ease;
         }
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                z-index: 1000;
-                height: 100vh;
-                left: -250px;
-            }
-            .sidebar.mobile-show {
-                left: 0;
-            }
-            .overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0,0,0,0.5);
-                z-index: 999;
-            }
-            .overlay.show {
-                display: block;
-            }
+        
+        .faq-item:hover {
+            background-color: rgba(30, 58, 138, 0.05);
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <!-- Login Page -->
-    <div id="login-page" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800 p-4">
-        <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
-            <div class="text-center mb-8">
-                <img src="https://via.placeholder.com/150x50?text=SENT" alt="SENT Logo" class="h-12 mx-auto mb-4">
-                <h1 class="text-2xl font-bold text-gray-800">Gestão de Obras</h1>
-                <p class="text-gray-600">Acesse sua conta para continuar</p>
-            </div>
-            
-            <form id="login-form" class="space-y-4">
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail ou CPF</label>
-                    <input type="text" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="seu@email.com ou 123.456.789-00" required>
+<body class="font-sans text-gray-800">
+    <!-- ============================================ -->
+    <!-- CABEÇALHO FIXO COM CTA - SUBSTITUA O LINK #offer PELO SEU LINK DE COMPRA -->
+    <!-- ============================================ -->
+    <div class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-primary font-bold text-xl">REVIT ELITE</div>
+            <a href="#offer" class="bg-secondary hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+                <span class="hidden md:inline">SIM, EU QUERO ESSA COLEÇÃO</span>
+                <span class="md:hidden">COMPRAR AGORA</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEÇÃO HERO (PRINCIPAL) - ALTERE TEXTO E IMAGENS -->
+    <!-- ============================================ -->
+    <section class="hero-gradient text-white pt-24 pb-16 md:pt-32 md:pb-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block bg-secondary text-primary font-bold px-4 py-1 rounded-full mb-4 text-sm">LANÇAMENTO EXCLUSIVO</div>
+                <h1 class="font-display text-3xl md:text-5xl font-bold leading-tight mb-6">
+                    19 Projetos Revit de Casas de Alto Padrão <span class="text-secondary">+ 1 Projeto Bônus</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                    A coleção definitiva para arquitetos, engenheiros e designers que querem impressionar seus clientes com projetos modernos, completos e prontos para uso
+                </p>
+                <div class="floating-cta">
+                    <!-- SUBSTITUIR O LINK #offer PELO SEU LINK DE COMPRA -->
+                    <a href="#offer" class="bg-secondary hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105 shadow-xl inline-block">
+                        SIM, EU QUERO ESSA COLEÇÃO
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
-                
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
-                    <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••" required>
-                </div>
-                
-                <div class="flex items-center justify-between">
+                <div class="mt-6 flex items-center justify-center space-x-4">
                     <div class="flex items-center">
-                        <input type="checkbox" id="remember" name="remember" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="remember" class="ml-2 block text-sm text-gray-700">Lembrar-me</label>
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <span>Arquivos editáveis</span>
                     </div>
-                    <a href="#" id="forgot-password" class="text-sm text-blue-600 hover:text-blue-800">Esqueci minha senha</a>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <span>7 dias de garantia</span>
+                    </div>
                 </div>
-                
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out">
-                    Entrar
-                </button>
-                
-                <div class="text-center mt-4">
-                    <p class="text-sm text-gray-600">Não tem uma conta? <a href="#" id="register-link" class="text-blue-600 hover:text-blue-800 font-medium">Cadastre-se</a></p>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Registration Page (Hidden by default) -->
-    <div id="register-page" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800 p-4 hidden">
-        <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-2xl">
-            <div class="text-center mb-8">
-                <img src="https://via.placeholder.com/150x50?text=SENT" alt="SENT Logo" class="h-12 mx-auto mb-4">
-                <h1 class="text-2xl font-bold text-gray-800">Criar nova conta</h1>
-                <p class="text-gray-600">Preencha os dados abaixo para cadastrar sua empresa</p>
+    <!-- ============================================ -->
+    <!-- MOSTRUÁRIO DE PROJETOS - ALTERE IMAGENS E DESCRIÇÕES -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">Projetos Exclusivos Que Impressionam</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Cada projeto foi meticulosamente criado por especialistas em arquitetura e engenharia para atender aos mais altos padrões do mercado
+                </p>
             </div>
             
-            <form id="register-form" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="company-name" class="block text-sm font-medium text-gray-700 mb-1">Nome da Empresa</label>
-                        <input type="text" id="company-name" name="company-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nome da sua empresa" required>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- PROJETO 1 - SUBSTITUIR IMAGEM E DESCRIÇÃO -->
+                <div class="project-card bg-white rounded-xl overflow-hidden transition duration-300">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden">
+                        <!-- SUBSTITUIR IMAGEM DO PROJETO -->
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Modern House Project" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                            <span class="text-white font-bold">Impacto Visual Imediato</span>
+                        </div>
                     </div>
-                    
-                    <div>
-                        <label for="responsible" class="block text-sm font-medium text-gray-700 mb-1">Responsável</label>
-                        <input type="text" id="responsible" name="responsible" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nome do responsável" required>
-                    </div>
-                    
-                    <div>
-                        <label for="document" class="block text-sm font-medium text-gray-700 mb-1">CNPJ ou CPF</label>
-                        <input type="text" id="document" name="document" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="00.000.000/0000-00 ou 000.000.000-00" required>
-                    </div>
-                    
-                    <div>
-                        <label for="register-email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
-                        <input type="email" id="register-email" name="register-email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="seu@email.com" required>
-                    </div>
-                    
-                    <div>
-                        <label for="register-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
-                        <input type="password" id="register-password" name="register-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••" required>
-                    </div>
-                    
-                    <div>
-                        <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Senha</label>
-                        <input type="password" id="confirm-password" name="confirm-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••" required>
-                    </div>
-                    
-                    <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
-                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="(00) 00000-0000" required>
-                    </div>
-                    
-                    <div class="md:col-span-2">
-                        <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Endereço</label>
-                        <input type="text" id="address" name="address" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Rua, número, complemento" required>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2">Residência Moderna V1</h3>
+                        <p class="text-gray-600 mb-4">380m² • 4 quartos • Piscina • Home theater</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-secondary font-bold">Incluído na coleção</span>
+                            <i class="fas fa-chevron-right text-primary"></i>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="flex items-center">
-                    <input type="checkbox" id="terms" name="terms" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
-                    <label for="terms" class="ml-2 block text-sm text-gray-700">Eu concordo com os <a href="#" class="text-blue-600 hover:text-blue-800">Termos de Serviço</a> e <a href="#" class="text-blue-600 hover:text-blue-800">Política de Privacidade</a></label>
+                <!-- PROJETO 2 - SUBSTITUIR IMAGEM E DESCRIÇÃO -->
+                <div class="project-card bg-white rounded-xl overflow-hidden transition duration-300">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden">
+                        <!-- SUBSTITUIR IMAGEM DO PROJETO -->
+                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Contemporary House Project" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                            <span class="text-white font-bold">Layout Otimizado</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2">Residência Contemporânea V2</h3>
+                        <p class="text-gray-600 mb-4">420m² • 5 quartos • Jardim vertical • Home office</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-secondary font-bold">Incluído na coleção</span>
+                            <i class="fas fa-chevron-right text-primary"></i>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="flex flex-col md:flex-row gap-4 mt-6">
-                    <button type="submit" class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out">
-                        Cadastrar
-                    </button>
-                    <button type="button" id="back-to-login" class="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-150 ease-in-out">
-                        Voltar para Login
-                    </button>
+                <!-- PROJETO 3 - SUBSTITUIR IMAGEM E DESCRIÇÃO -->
+                <div class="project-card bg-white rounded-xl overflow-hidden transition duration-300">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden">
+                        <!-- SUBSTITUIR IMAGEM DO PROJETO -->
+                        <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Luxury House Project" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                            <span class="text-white font-bold">Pronto para Aprovação</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2">Mansão Clássica V3</h3>
+                        <p class="text-gray-600 mb-4">520m² • 6 quartos • Sala de jogos • Spa</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-secondary font-bold">Incluído na coleção</span>
+                            <i class="fas fa-chevron-right text-primary"></i>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Main App (Hidden by default) -->
-    <div id="app-container" class="hidden">
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-button" class="md:hidden fixed top-4 left-4 z-50 bg-white p-2 rounded-md shadow-md">
-            <i class="fas fa-bars text-gray-700"></i>
-        </button>
-
-        <!-- Overlay for mobile menu -->
-        <div id="overlay" class="overlay"></div>
-
-        <!-- Sidebar -->
-        <div id="sidebar" class="sidebar sidebar-expanded bg-gray-800 text-white h-screen fixed top-0 left-0 overflow-y-auto">
-            <div class="p-4 flex items-center justify-between border-b border-gray-700">
-                <div class="flex items-center">
-                    <img src="https://via.placeholder.com/40x40?text=LOGO" alt="Logo" class="h-8 w-8 rounded-full">
-                    <span class="ml-2 font-semibold text-lg">SENT</span>
-                </div>
-                <button id="sidebar-toggle" class="text-gray-400 hover:text-white focus:outline-none">
-                    <i class="fas fa-times"></i>
-                </button>
             </div>
             
-            <nav class="mt-6">
-                <div class="px-4 py-2 text-gray-400 uppercase text-xs font-semibold tracking-wider">
-                    Menu Principal
-                </div>
-                
-                <a href="#" id="dashboard-link" class="flex items-center px-4 py-3 text-white bg-blue-700">
-                    <i class="fas fa-tachometer-alt mr-3"></i>
-                    <span>Dashboard</span>
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-6">E mais 16 projetos exclusivos de alto padrão incluídos na coleção</p>
+                <!-- SUBSTITUIR O LINK #offer PELO SEU LINK DE COMPRA -->
+                <a href="#offer" class="bg-primary hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-full transition duration-300 inline-flex items-center">
+                    Ver todos os projetos
+                    <i class="fas fa-arrow-down ml-2"></i>
                 </a>
-                
-                <a href="#" id="works-link" class="flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700">
-                    <i class="fas fa-building mr-3"></i>
-                    <span>Obras</span>
-                </a>
-                
-                <a href="#" id="reports-link" class="flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700">
-                    <i class="fas fa-chart-bar mr-3"></i>
-                    <span>Relatórios</span>
-                </a>
-                
-                <a href="#" id="team-link" class="flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700">
-                    <i class="fas fa-users mr-3"></i>
-                    <span>Equipe</span>
-                </a>
-                
-                <a href="#" id="settings-link" class="flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700">
-                    <i class="fas fa-cog mr-3"></i>
-                    <span>Configurações</span>
-                </a>
-                
-                <div class="px-4 py-2 mt-4 text-gray-400 uppercase text-xs font-semibold tracking-wider">
-                    Conta
-                </div>
-                
-                <a href="#" id="profile-link" class="flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700">
-                    <i class="fas fa-user mr-3"></i>
-                    <span>Meu Perfil</span>
-                </a>
-                
-                <a href="#" id="logout-link" class="flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700">
-                    <i class="fas fa-sign-out-alt mr-3"></i>
-                    <span>Sair</span>
-                </a>
-            </nav>
+            </div>
         </div>
+    </section>
 
-        <!-- Main Content -->
-        <div id="main-content" class="main-content ml-0 md:ml-[250px] min-h-screen">
-            <!-- Top Navigation -->
-            <header class="bg-white shadow-sm">
-                <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                    <h1 class="text-lg font-semibold text-gray-900" id="page-title">Dashboard</h1>
-                    
-                    <div class="flex items-center space-x-4">
-                        <!-- Notifications -->
-                        <div class="relative">
-                            <button id="notifications-button" class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 relative">
-                                <span class="sr-only">Notificações</span>
-                                <i class="fas fa-bell h-6 w-6"></i>
-                                <span class="alert-badge">3</span>
-                            </button>
-                        </div>
-                        
-                        <!-- User Menu -->
-                        <div class="relative">
-                            <button id="user-menu-button" class="flex items-center space-x-2 focus:outline-none">
-                                <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/40x40?text=U" alt="User">
-                                <span class="hidden md:inline text-sm font-medium text-gray-700">Usuário</span>
-                            </button>
-                        </div>
+    <!-- ============================================ -->
+    <!-- SEÇÃO DE BENEFÍCIOS - ALTERE TEXTO SE NECESSÁRIO -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">O Que Você Vai Receber</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Tudo o que você precisa para impressionar clientes e acelerar seu fluxo de trabalho
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- BENEFÍCIO 1 -->
+                <div class="text-center p-6 rounded-lg">
+                    <div class="bg-primary bg-opacity-10 text-primary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-2xl"></i>
                     </div>
+                    <h3 class="font-bold text-xl mb-2">Projetos Exclusivos</h3>
+                    <p class="text-gray-600">19 projetos únicos que só existem nesta coleção, criados por especialistas em arquitetura e engenharia.</p>
                 </div>
-            </header>
+                
+                <!-- BENEFÍCIO 2 -->
+                <div class="text-center p-6 rounded-lg">
+                    <div class="bg-primary bg-opacity-10 text-primary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-edit text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Arquivos Editáveis</h3>
+                    <p class="text-gray-600">Todos os arquivos em formato .rvt (Revit) totalmente editáveis para você personalizar conforme necessário.</p>
+                </div>
+                
+                <!-- BENEFÍCIO 3 -->
+                <div class="text-center p-6 rounded-lg">
+                    <div class="bg-primary bg-opacity-10 text-primary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-layer-group text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Documentação Completa</h3>
+                    <p class="text-gray-600">Plantas baixas, cortes, fachadas, detalhes construtivos e renders 3D prontos para apresentação.</p>
+                </div>
+                
+                <!-- BENEFÍCIO 4 -->
+                <div class="text-center p-6 rounded-lg">
+                    <div class="bg-primary bg-opacity-10 text-primary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Pronto para Uso</h3>
+                    <p class="text-gray-600">Economize centenas de horas de trabalho. Comece a usar imediatamente e impressione seus clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Dashboard Page -->
-            <div id="dashboard-page" class="p-4 md:p-8">
-                <div class="max-w-7xl mx-auto">
-                    <!-- Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        <div class="bg-white rounded-lg shadow p-6">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-500">Total de Obras</p>
-                                    <p class="text-2xl font-semibold text-gray-900">24</p>
-                                </div>
-                                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
-                                    <i class="fas fa-building"></i>
-                                </div>
-                            </div>
+    <!-- ============================================ -->
+    <!-- VANTAGEM COMPETITIVA - ALTERE IMAGEM E TEXTO -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-6">A Escolha Mais Inteligente Para Seu Negócio</h2>
+                <p class="text-xl text-gray-700 mb-8">
+                    Você pode gastar semanas criando um projeto do zero... <span class="font-bold text-primary">ou começar hoje com um acervo que já vende por você.</span>
+                </p>
+                <div class="bg-white rounded-xl p-8 shadow-lg max-w-3xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-6 md:mb-0 md:pr-6">
+                            <!-- SUBSTITUIR IMAGEM -->
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Architect working" class="rounded-lg shadow-md">
                         </div>
-                        
-                        <div class="bg-white rounded-lg shadow p-6">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-500">Obras em Execução</p>
-                                    <p class="text-2xl font-semibold text-gray-900">8</p>
-                                </div>
-                                <div class="p-3 rounded-full bg-green-100 text-green-600">
-                                    <i class="fas fa-hard-hat"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-lg shadow p-6">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-500">Valor Total</p>
-                                    <p class="text-2xl font-semibold text-gray-900">R$ 4.2M</p>
-                                </div>
-                                <div class="p-3 rounded-full bg-purple-100 text-purple-600">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-lg shadow p-6">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-500">Alertas</p>
-                                    <p class="text-2xl font-semibold text-gray-900">3</p>
-                                </div>
-                                <div class="p-3 rounded-full bg-red-100 text-red-600">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Recent Works -->
-                    <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
-                        <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-medium text-gray-900">Obras Recentes</h3>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progresso</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="font-medium text-gray-900">Residencial Alphaville</div>
-                                            <div class="text-sm text-gray-500">Construção</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Construtora ABC</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Em execução</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
-                                            </div>
-                                            <span class="text-xs text-gray-500 mt-1">45% concluído</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Ver</a>
-                                            <a href="#" class="text-gray-600 hover:text-gray-900">Editar</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="font-medium text-gray-900">Shopping Center</div>
-                                            <div class="text-sm text-gray-500">Reforma</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Empresa XYZ</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Planejamento</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 15%"></div>
-                                            </div>
-                                            <span class="text-xs text-gray-500 mt-1">15% concluído</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Ver</a>
-                                            <a href="#" class="text-gray-600 hover:text-gray-900">Editar</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="font-medium text-gray-900">Condomínio Vista</div>
-                                            <div class="text-sm text-gray-500">Construção</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Construtora DEF</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Em execução</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 72%"></div>
-                                            </div>
-                                            <span class="text-xs text-gray-500 mt-1">72% concluído</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Ver</a>
-                                            <a href="#" class="text-gray-600 hover:text-gray-900">Editar</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <!-- Alerts -->
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
-                        <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-medium text-gray-900">Alertas e Pendências</h3>
-                        </div>
-                        <div class="divide-y divide-gray-200">
-                            <div class="px-6 py-4 flex items-start">
-                                <div class="flex-shrink-0 pt-1">
-                                    <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
-                                        <i class="fas fa-exclamation-triangle text-red-600"></i>
-                                    </div>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-sm font-medium text-gray-900">Atraso na etapa "Fundação"</h4>
-                                    <p class="mt-1 text-sm text-gray-600">A etapa está atrasada em 5 dias no projeto "Residencial Alphaville".</p>
-                                    <div class="mt-2 flex">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Urgente</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-6 py-4 flex items-start">
-                                <div class="flex-shrink-0 pt-1">
-                                    <div class="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                                        <i class="fas fa-box-open text-yellow-600"></i>
-                                    </div>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-sm font-medium text-gray-900">Estoque baixo de cimento</h4>
-                                    <p class="mt-1 text-sm text-gray-600">Restam apenas 10 sacos de cimento no estoque para a obra "Condomínio Vista".</p>
-                                    <div class="mt-2 flex">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Atenção</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-6 py-4 flex items-start">
-                                <div class="flex-shrink-0 pt-1">
-                                    <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                                        <i class="fas fa-file-invoice-dollar text-blue-600"></i>
-                                    </div>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-sm font-medium text-gray-900">Pagamentos pendentes</h4>
-                                    <p class="mt-1 text-sm text-gray-600">3 funcionários com pagamentos pendentes para esta semana.</p>
-                                    <div class="mt-2 flex">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Financeiro</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="md:w-1/2 text-left">
+                            <h3 class="font-bold text-xl mb-4 text-primary">Por que a Coleção Revit Elite é diferente?</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                                    <span>Projetos testados e aprovados por clientes exigentes</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                                    <span>Economize até 80% do tempo em cada projeto</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                                    <span>Padrão profissional que aumenta seu prestígio</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                                    <span>Flexibilidade total para adaptar aos seus clientes</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Works Page (Hidden by default) -->
-            <div id="works-page" class="p-4 md:p-8 hidden">
-                <div class="max-w-7xl mx-auto">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4 md:mb-0">Obras</h2>
-                        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
-                            <div class="relative">
-                                <input type="text" placeholder="Buscar obra..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-64">
-                                <div class="absolute left-3 top-2.5 text-gray-400">
-                                    <i class="fas fa-search"></i>
-                                </div>
-                            </div>
-                            <button id="new-work-button" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center">
-                                <i class="fas fa-plus mr-2"></i> Nova Obra
-                            </button>
+    <!-- ============================================ -->
+    <!-- DEPOIMENTOS - ALTERE NOMES E TEXTOS -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">O Que Profissionais Como Você Estão Dizendo</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Arquitetos e engenheiros que já estão usando a Coleção Revit Elite
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- DEPOIMENTO 1 -->
+                <div class="testimonial-card bg-gray-50 rounded-lg p-6 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-primary mr-4">
+                            <i class="fas fa-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Rafael Souza</h4>
+                            <p class="text-gray-600 text-sm">Engenheiro Civil</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-700 mb-4">
+                        <i class="fas fa-quote-left text-secondary opacity-50 mr-2"></i>
+                        Sou engenheiro e nunca vi projetos tão completos. Me ajudaram a fechar 2 obras em 15 dias. O retorno foi imediato!
+                        <i class="fas fa-quote-right text-secondary opacity-50 ml-2"></i>
+                    </div>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- DEPOIMENTO 2 -->
+                <div class="testimonial-card bg-gray-50 rounded-lg p-6 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-primary mr-4">
+                            <i class="fas fa-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Ana Carolina</h4>
+                            <p class="text-gray-600 text-sm">Arquiteta</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-700 mb-4">
+                        <i class="fas fa-quote-left text-secondary opacity-50 mr-2"></i>
+                        Melhor investimento que fiz como arquiteta. Os projetos são lindos e me pouparam meses de trabalho. Já utilizei em 3 clientes!
+                        <i class="fas fa-quote-right text-secondary opacity-50 ml-2"></i>
+                    </div>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- DEPOIMENTO 3 -->
+                <div class="testimonial-card bg-gray-50 rounded-lg p-6 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-primary mr-4">
+                            <i class="fas fa-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Marcos Vinícius</h4>
+                            <p class="text-gray-600 text-sm">Designer de Interiores</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-700 mb-4">
+                        <i class="fas fa-quote-left text-secondary opacity-50 mr-2"></i>
+                        Com a Coleção Revit Elite, consegui oferecer projetos completos de arquitetura junto com meus serviços de interiores. Meu faturamento triplicou!
+                        <i class="fas fa-quote-right text-secondary opacity-50 ml-2"></i>
+                    </div>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SEÇÃO DE OFERTA - ALTERE PREÇO, CONDIÇÕES E LINK DE COMPRA -->
+    <!-- ============================================ -->
+    <section id="offer" class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block bg-secondary text-primary font-bold px-4 py-1 rounded-full mb-4 text-sm">OFERTA POR TEMPO LIMITADO</div>
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-6">
+                    Leve Agora 19 Projetos + 1 Projeto BÔNUS GRÁTIS
+                </h2>
+                <p class="text-xl mb-8">
+                    Apenas até <span class="font-bold">31 de julho</span> ou enquanto durar a oferta
+                </p>
+                
+                <div class="bg-white text-primary rounded-xl p-8 max-w-2xl mx-auto shadow-2xl">
+                    <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+                        <div class="text-left mb-4 md:mb-0">
+                            <h3 class="font-bold text-2xl">Coleção Revit Elite</h3>
+                            <p>19 Projetos + Bônus Exclusivo</p>
+                        </div>
+                        <div class="text-center">
+                            <!-- ALTERAR PREÇO AQUI -->
+                            <div class="text-4xl font-bold text-secondary">R$ 997</div>
+                            <div class="text-sm">ou 12x de R$ 89,70</div>
                         </div>
                     </div>
                     
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
-                        <div class="px-6 py-4 border-b border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center">
-                            <div class="mb-2 md:mb-0">
-                                <label for="status-filter" class="sr-only">Filtrar por status</label>
-                                <select id="status-filter" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                                    <option value="all">Todos os status</option>
-                                    <option value="planning">Planejamento</option>
-                                    <option value="execution">Em execução</option>
-                                    <option value="paused">Pausada</option>
-                                    <option value="completed">Concluída</option>
-                                </select>
-                            </div>
-                            <div class="text-sm text-gray-500">Mostrando 8 de 24 obras</div>
+                    <div class="border border-secondary rounded-lg p-4 mb-6">
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-gift text-secondary text-2xl mr-3"></i>
+                            <span class="font-bold">BÔNUS:</span>
+                            <span class="ml-2">Projeto de Casa com Piscina Infinity (valor R$ 297)</span>
                         </div>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
-                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="font-medium text-gray-900">Residencial Alphaville</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Construção</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Construtora ABC</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Em execução</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <div>15/03/2023</div>
-                                            <div class="text-gray-400">15/10/2023</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">R$ 1.200.000</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button class="text-blue-600 hover:text-blue-900 mr-3"><i class="fas fa-eye"></i></button>
-                                            <button class="text-gray-600 hover:text-gray-900 mr-3"><i class="fas fa-edit"></i></button>
-                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="font-medium text-gray-900">Shopping Center</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Reforma</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Empresa XYZ</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Planejamento</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <div>01/06/2023</div>
-                                            <div class="text-gray-400">30/11/2023</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">R$ 850.000</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button class="text-blue-600 hover:text-blue-900 mr-3"><i class="fas fa-eye"></i></button>
-                                            <button class="text-gray-600 hover:text-gray-900 mr-3"><i class="fas fa-edit"></i></button>
-                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="font-medium text-gray-900">Condomínio Vista</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Construção</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Construtora DEF</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Em execução</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <div>10/01/2023</div>
-                                            <div class="text-gray-400">15/09/2023</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">R$ 950.000</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button class="text-blue-600 hover:text-blue-900 mr-3"><i class="fas fa-eye"></i></button>
-                                            <button class="text-gray-600 hover:text-gray-900 mr-3"><i class="fas fa-edit"></i></button>
-                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="font-medium text-gray-900">Edifício Comercial</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Construção</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Empresa GHI</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Concluída</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <div>05/01/2023</div>
-                                            <div class="text-gray-400">30/06/2023</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">R$ 2.500.000</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button class="text-blue-600 hover:text-blue-900 mr-3"><i class="fas fa-eye"></i></button>
-                                            <button class="text-gray-600 hover:text-gray-900 mr-3"><i class="fas fa-edit"></i></button>
-                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
-                            <div class="text-sm text-gray-500">Mostrando <span class="font-medium">1</span> a <span class="font-medium">4</span> de <span class="font-medium">8</span> resultados</div>
-                            <div class="flex space-x-2">
-                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">Anterior</button>
-                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">Próxima</button>
-                            </div>
+                    </div>
+                    
+                    <ul class="space-y-3 mb-8 text-left">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>19 projetos exclusivos em Revit (.rvt)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>1 projeto bônus grátis (piscina infinity)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>Plantas, cortes, fachadas e renders</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>Totalmente editável e personalizável</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>7 dias de garantia incondicional</span>
+                        </li>
+                    </ul>
+                    
+                    <!-- SUBSTITUIR O LINK # PELO SEU LINK DE COMPRA DO HOTMART -->
+                    <a href="#" class="bg-secondary hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105 shadow-xl inline-block w-full">
+                        GARANTIR MINHA COLEÇÃO AGORA
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    
+                    <!-- LOGOS DE PAGAMENTO - SUBSTITUIR PELAS IMAGENS REAIS -->
+                    <div class="mt-6 flex items-center justify-center">
+                        <img src="https://via.placeholder.com/40" alt="Secure Payment" class="h-8 mx-2">
+                        <img src="https://via.placeholder.com/40" alt="Secure Payment" class="h-8 mx-2">
+                        <img src="https://via.placeholder.com/40" alt="Secure Payment" class="h-8 mx-2">
+                        <img src="https://via.placeholder.com/40" alt="Secure Payment" class="h-8 mx-2">
+                    </div>
+                </div>
+                
+                <div class="mt-8 bg-white bg-opacity-10 rounded-lg p-6 max-w-2xl mx-auto">
+                    <div class="flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-2xl mr-4 text-secondary"></i>
+                        <div class="text-left">
+                            <h4 class="font-bold">Garantia de Satisfação</h4>
+                            <p>Não gostou? Devolvemos seu dinheiro em até 7 dias. Sem perguntas. Sem estresse.</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- New Work Page (Hidden by default) -->
-            <div id="new-work-page" class="p-4 md:p-8 hidden">
-                <div class="max-w-7xl mx-auto">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900">Nova Obra</h2>
-                        <button id="back-to-works" class="text-gray-600 hover:text-gray-900 flex items-center">
-                            <i class="fas fa-arrow-left mr-2"></i> Voltar para Obras
-                        </button>
+    <!-- ============================================ -->
+    <!-- PERGUNTAS FREQUENTES - ALTERE PERGUNTAS E RESPOSTAS -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">Perguntas Frequentes</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Tire todas suas dúvidas sobre a Coleção Revit Elite
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ 1 -->
+                <div class="faq-item bg-white rounded-lg p-6 mb-4 cursor-pointer hover:shadow-md">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">Os arquivos funcionam em qual versão do Revit?</h3>
+                        <i class="fas fa-chevron-down text-primary"></i>
                     </div>
-                    
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
-                        <!-- Tabs Navigation -->
-                        <div class="border-b border-gray-200">
-                            <nav class="flex overflow-x-auto">
-                                <button data-tab="work-data" class="tab-button px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap active">
-                                    <i class="fas fa-folder mr-2"></i> Dados da Obra
-                                </button>
-                                <button data-tab="budget" class="tab-button px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap">
-                                    <i class="fas fa-money-bill-wave mr-2"></i> Orçamento
-                                </button>
-                                <button data-tab="stages" class="tab-button px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap">
-                                    <i class="fas fa-tasks mr-2"></i> Etapas
-                                </button>
-                                <button data-tab="materials" class="tab-button px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap">
-                                    <i class="fas fa-boxes mr-2"></i> Materiais
-                                </button>
-                                <button data-tab="workers" class="tab-button px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap">
-                                    <i class="fas fa-hard-hat mr-2"></i> Trabalhadores
-                                </button>
-                                <button data-tab="payments" class="tab-button px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap">
-                                    <i class="fas fa-hand-holding-usd mr-2"></i> Pagamentos
-                                </button>
-                                <button data-tab="comparison" class="tab-button px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap">
-                                    <i class="fas fa-chart-line mr-2"></i> Orçado x Realizado
-                                </button>
-                                <button data-tab="attachments" class="tab-button px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap">
-                                    <i class="fas fa-paperclip mr-2"></i> Anexos
-                                </button>
-                                <button data-tab="reports" class="tab-button px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap">
-                                    <i class="fas fa-file-alt mr-2"></i> Relatórios
-                                </button>
-                            </nav>
-                        </div>
-                        
-                        <!-- Tab Contents -->
-                        <div class="p-6">
-                            <!-- Work Data Tab -->
-                            <div id="work-data" class="tab-content active">
-                                <form class="space-y-6">
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label for="work-name" class="block text-sm font-medium text-gray-700 mb-1">Nome da Obra *</label>
-                                            <input type="text" id="work-name" name="work-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Residencial Alphaville" required>
-                                        </div>
-                                        
-                                        <div>
-                                            <label for="work-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo *</label>
-                                            <select id="work-type" name="work-type" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                                                <option value="">Selecione...</option>
-                                                <option value="construction">Construção</option>
-                                                <option value="renovation">Reforma</option>
-                                                <option value="maintenance">Manutenção</option>
-                                                <option value="demolition">Demolição</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div>
-                                            <label for="client" class="block text-sm font-medium text-gray-700 mb-1">Cliente *</label>
-                                            <input type="text" id="client" name="client" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nome do cliente" required>
-                                        </div>
-                                        
-                                        <div>
-                                            <label for="responsible" class="block text-sm font-medium text-gray-700 mb-1">Responsável Técnico *</label>
-                                            <input type="text" id="responsible" name="responsible" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nome do responsável" required>
-                                        </div>
-                                        
-                                        <div class="md:col-span-2">
-                                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Endereço *</label>
-                                            <input type="text" id="address" name="address" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Rua, número, complemento, cidade, estado" required>
-                                        </div>
-                                        
-                                        <div>
-                                            <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status *</label>
-                                            <select id="status" name="status" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                                                <option value="planning">Planejamento</option>
-                                                <option value="execution">Em execução</option>
-                                                <option value="paused">Pausada</option>
-                                                <option value="completed">Concluída</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div>
-                                            <label for="start-date" class="block text-sm font-medium text-gray-700 mb-1">Data de Início *</label>
-                                            <input type="date" id="start-date" name="start-date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                                        </div>
-                                        
-                                        <div>
-                                            <label for="end-date" class="block text-sm font-medium text-gray-700 mb-1">Previsão de Término *</label>
-                                            <input type="date" id="end-date" name="end-date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                                        </div>
-                                        
-                                        <div class="md:col-span-2">
-                                            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
-                                            <textarea id="description" name="description" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Detalhes sobre a obra"></textarea>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-                                        <button type="button" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                                            Cancelar
-                                        </button>
-                                        <button type="button" data-next-tab="budget" class="next-tab-button bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                                            Próximo <i class="fas fa-arrow-right ml-2"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <!-- Budget Tab -->
-                            <div id="budget" class="tab-content">
-                                <div class="mb-6">
-                                    <h3 class="text-lg font-medium text-gray-900 mb-2">Orçamento da Obra</h3>
-                                    <p class="text-sm text-gray-500">Adicione os itens do orçamento por categorias</p>
-                                </div>
-                                
-                                <div class="mb-6">
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h4 class="text-md font-medium text-gray-700">Materiais</h4>
-                                        <button class="text-sm text-blue-600 hover:text-blue-800 flex items-center">
-                                            <i class="fas fa-plus mr-1"></i> Adicionar Material
-                                        </button>
-                                    </div>
-                                    
-                                    <div class="overflow-x-auto">
-                                        <table class="min-w-full divide-y divide-gray-200">
-                                            <thead class="bg-gray-50">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descrição</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unidade</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantidade</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor Unitário</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="bg-white divide-y divide-gray-200">
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <input type="text" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Cimento">
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <select class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500">
-                                                            <option>Saco</option>
-                                                            <option>Kg</option>
-                                                            <option>Tonelada</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <input type="number" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="100">
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <input type="text" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="R$ 35,00">
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">R$ 3.500,00</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                        <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <input type="text" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Tijolo">
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <select class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500">
-                                                            <option>Unidade</option>
-                                                            <option>Milheiro</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <input type="number" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="5000">
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <input type="text" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="R$ 0,80">
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">R$ 4.000,00</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                        <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-6">
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h4 class="text-md font-medium text-gray-700">Mão de Obra</h4>
-                                        <button class="text-sm text-blue-600 hover:text-blue-800 flex items-center">
-                                            <i class="fas fa-plus mr-1"></i> Adicionar Mão de Obra
-                                        </button>
-                                    </div>
-                                    
-                                    <div class="overflow-x-auto">
-                                        <table class="min-w-full divide-y divide-gray-200">
-                                            <thead class="bg-gray-50">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descrição</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unidade</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantidade</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor Unitário</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="bg-white divide-y divide-gray-200">
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <input type="text" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Pedreiro">
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <select class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500">
-                                                            <option>Hora</option>
-                                                            <option>Dia</option>
-                                                            <option>Tarefa</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <input type="number" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="200">
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <input type="text" class="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="R$ 45,00">
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">R$ 9.000,00</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                        <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                
-                                <div class="bg-gray-50 p-4 rounded-lg mb-6">
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        <div class="bg-white p-4 rounded shadow-sm">
-                                            <p class="text-sm font-medium text-gray-500">Total Materiais</p>
-                                            <p class="text-xl font-semibold text-gray-900">R$ 7.500,00</p>
-                                        </div>
-                                        <div class="bg-white p-4 rounded shadow-sm">
-                                            <p class="text-sm font-medium text-gray-500">Total Mão de Obra</p>
-                                            <p class="text-xl font-semibold text-gray-900">R$ 9.000,00</p>
-                                        </div>
-                                        <div class="bg-blue-100 p-4 rounded shadow-sm">
-                                            <p class="text-sm font-medium text-blue-800">Valor Total da Obra</p>
-                                            <p class="text-xl font-semibold text-blue-900">R$ 16.500,00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex justify-between pt-4 border-t border-gray-200">
-                                    <button type="button" data-prev-tab="work-data" class="prev-tab-button bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                                        <i class="fas fa-arrow-left mr-2"></i> Voltar
-                                    </button>
-                                    <button type="button" data-next-tab="stages" class="next-tab-button bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                                        Próximo <i class="fas fa-arrow-right ml-2"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Stages Tab -->
-                            <div id="stages" class="tab-content">
-                                <div class="mb-6">
-                                    <h3 class="text-lg font-medium text-gray-900 mb-2">Etapas da Obra</h3>
-                                    <p class="text-sm text-gray-500">Defina as etapas do projeto e acompanhe o progresso</p>
-                                </div>
-                                
-                                <div class="mb-6">
-                                    <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center mb-4">
-                                        <i class="fas fa-plus mr-2"></i> Adicionar Etapa
-                                    </button>
-                                    
-                                    <div class="space-y-4">
-                                        <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
-                                            <div class="flex items-start justify-between">
-                                                <div class="flex-1">
-                                                    <h4 class="font-medium text-gray-900">Fundação</h4>
-                                                    <p class="text-sm text-gray-500 mt-1">Preparação do terreno e execução da fundação</p>
-                                                    
-                                                    <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                        <div>
-                                                            <label class="block text-xs font-medium text-gray-500">Data Início</label>
-                                                            <p class="text-sm">15/03/2023</p>
-                                                        </div>
-                                                        <div>
-                                                            <label class="block text-xs font-medium text-gray-500">Data Término</label>
-                                                            <p class="text-sm">30/03/2023</p>
-                                                        </div>
-                                                        <div>
-                                                            <label class="block text-xs font-medium text-gray-500">Status</label>
-                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Em andamento</span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="mt-3">
-                                                        <label class="block text-xs font-medium text-gray-500 mb-1">Progresso</label>
-                                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
-                                                        </div>
-                                                        <span class="text-xs text-gray-500 mt-1">45% concluído</span>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="ml-4 flex space-x-2">
-                                                    <button class="text-blue-600 hover:text-blue-900"><i class="fas fa-edit"></i></button>
-                                                    <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="mt-4 pl-4 border-l-2 border-gray-200">
-                                                <h5 class="text-sm font-medium text-gray-700 mb-2">Subetapas</h5>
-                                                
-                                                <div class="space-y-3">
-                                                    <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
-                                                        <div>
-                                                            <p class="text-sm font-medium">Escavação</p>
-                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Concluída</span>
-                                                        </div>
-                                                        <div class="flex space-x-2">
-                                                            <button class="text-blue-600 hover:text-blue-900 text-sm"><i class="fas fa-edit"></i></button>
-                                                            <button class="text-red-600 hover:text-red-900 text-sm"><i class="fas fa-trash"></i></button>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
-                                                        <div>
-                                                            <p class="text-sm font-medium">Formas</p>
-                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Em andamento</span>
-                                                        </div>
-                                                        <div class="flex space-x-2">
-                                                            <button class="text-blue-600 hover:text-blue-900 text-sm"><i class="fas fa-edit"></i></button>
-                                                            <button class="text-red-600 hover:text-red-900 text-sm"><i class="fas fa-trash"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <button class="mt-2 text-sm text-blue-600 hover:text-blue-800 flex items-center">
-                                                    <i class="fas fa-plus mr-1"></i> Adicionar Subetapa
-                                                </button>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
-                                            <div class="flex items-start justify-between">
-                                                <div class="flex-1">
-                                                    <h4 class="font-medium text-gray-900">Alvenaria</h4>
-                                                    <p class="text-sm text-gray-500 mt-1">Levantamento de paredes</p>
-                                                    
-                                                    <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                        <div>
-                                                            <label class="block text-xs font-medium text-gray-500">Data Início</label>
-                                                            <p class="text-sm">01/04/2023</p>
-                                                        </div>
-                                                        <div>
-                                                            <label class="block text-xs font-medium text-gray-500">Data Término</label>
-                                                            <p class="text-sm">30/04/2023</p>
-                                                        </div>
-                                                        <div>
-                                                            <label class="block text-xs font-medium text-gray-500">Status</label>
-                                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Não iniciada</span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="mt-3">
-                                                        <label class="block text-xs font-medium text-gray-500 mb-1">Progresso</label>
-                                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
-                                                        </div>
-                                                        <span class="text-xs text-gray-500 mt-1">0% concluído</span>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="ml-4 flex space-x-2">
-                                                    <button class="text-blue-600 hover:text-blue-900"><i class="fas fa-edit"></i></button>
-                                                    <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex justify-between pt-4 border-t border-gray-200">
-                                    <button type="button" data-prev-tab="budget" class="prev-tab-button bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                                        <i class="fas fa-arrow-left mr-2"></i> Voltar
-                                    </button>
-                                    <button type="button" data-next-tab="materials" class="next-tab-button bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                                        Próximo <i class="fas fa-arrow-right ml-2"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Materials Tab -->
-                            <div id="materials" class="tab-content">
-                                <div class="mb-6">
-                                    <h3 class="text-lg font-medium text-gray-900 mb-2">Controle de Materiais</h3>
-                                    <p class="text-sm text-gray-500">Gerencie os materiais utilizados em cada etapa da obra</p>
-                                </div>
-                                
-                                <div class="mb-6">
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h4 class="text-md font-medium text-gray-700">Materiais por Etapa</h4>
-                                        <button class="text-sm text-blue-600 hover:text-blue-800 flex items-center">
-                                            <i class="fas fa-plus mr-1"></i> Adicionar Material
-                                        </button>
-                                    </div>
-                                    
-                                    <div class="overflow-x-auto">
-                                        <table class="min-w-full divide-y divide-gray-200">
-                                            <thead class="bg-gray-50">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Material</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Etapa</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantidade</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Disponível</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usado</th>
-                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="bg-white divide-y divide-gray-200">
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <div class="font-medium">Cimento</div>
-                                                        <div class="text-xs text-gray-500">Saco 50kg</div>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Fundação</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">100</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">60</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">40</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                        <button class="text-blue-600 hover:text-blue-900 mr-2"><i class="fas fa-edit"></i></button>
-                                                        <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <div class="font-medium">Tijolo</div>
-                                                        <div class="text-xs text-gray-500">Unidade</div>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Alvenaria</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">5000</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">5000</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0</td>
-                                                    <td class="
-</html>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>Todos os arquivos são compatíveis com Revit 2020 ou superior. Se você usa uma versão anterior, recomendamos atualizar seu software para aproveitar todos os recursos.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="faq-item bg-white rounded-lg p-6 mb-4 cursor-pointer hover:shadow-md">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">Posso adaptar os projetos para meus clientes?</h3>
+                        <i class="fas fa-chevron-down text-primary"></i>
+                    </div>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>Sim! Todos os arquivos são 100% editáveis e você pode personalizar conforme as necessidades de cada cliente. Essa é justamente uma das principais vantagens da coleção.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="faq-item bg-white rounded-lg p-6 mb-4 cursor-pointer hover:shadow-md">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">Posso vender os projetos para meus clientes?</h3>
+                        <i class="fas fa-chevron-down text-primary"></i>
+                    </div>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>Com certeza! Você pode usar os projetos como base para seus trabalhos e vendê-los para quantos clientes quiser. A única restrição é a revenda da coleção completa para outros profissionais.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="faq-item bg-white rounded-lg p-6 mb-4 cursor-pointer hover:shadow-md">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">Quando recebo os arquivos após a compra?</h3>
+                        <i class="fas fa-chevron-down text-primary"></i>
+                    </div>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>O acesso é imediato! Após a confirmação do pagamento, você recebe um e-mail com o link para download de todos os arquivos. O processo é totalmente automatizado e você pode começar a usar em minutos.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="faq-item bg-white rounded-lg p-6 mb-4 cursor-pointer hover:shadow-md">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-lg">E se eu tiver problemas técnicos?</h3>
+                        <i class="fas fa-chevron-down text-primary"></i>
+                    </div>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>Nossa equipe de suporte está pronta para ajudar com qualquer dúvida técnica. Você pode entrar em contato por e-mail e normalmente respondemos em até 24 horas úteis.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-6">Ainda com dúvidas? Entre em contato conosco!</p>
+                <!-- SUBSTITUIR O LINK # PELO SEU LINK DE CONTATO -->
+                <a href="#" class="bg-primary hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-full transition duration-300 inline-flex items-center">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Fale conosco
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA FINAL - SUBSTITUIR LINK DE COMPRA -->
+    <!-- ============================================ -->
+    <section class="py-16 bg-secondary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-6">Não Deixe Essa Oportunidade Passar</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Adquira agora a Coleção Revit Elite e comece a impressionar seus clientes com projetos profissionais
+            </p>
+            
+            <div class="max-w-md mx-auto">
+                <div class="bg-white text-primary rounded-lg p-6 mb-6 shadow-xl">
+                    <!-- ALTERAR PREÇO AQUI -->
+                    <div class="text-3xl font-bold mb-2">R$ 997</div>
+                    <div class="text-sm mb-4">ou 12x de R$ 89,70</div>
+                    <ul class="space-y-2 mb-4 text-left text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>19 projetos exclusivos em Revit</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>+ 1 projeto bônus grátis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <
